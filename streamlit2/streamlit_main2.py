@@ -53,25 +53,23 @@ st.markdown("---")
 
 #################### progress ################
 import time as ts
-#bar = st.progress(0) # default olarak 100 basamak var
-#for i in range(10): # her bir saniye de 10 basamak ilerlesin
-#    bar.progress((i+1)*10) 
-#    ts.sleep(1)
+# bar = st.progress(0) # default olarak 100 basamak var
+# for i in range(1, 11): # her bir saniye de 10 basamak ilerlesin
+#     bar.progress(i*10) 
+#     ts.sleep(1)
 
 st.markdown("---")
 
 from datetime import time as zeit 
-
-
 
 def converter(value):
     m, s, ms = value.split(":")
     t_s = int(m)*60 + int(s) + int(ms)/1000 # birdakika 60 sn, 1 saniye 1000 milisaniye
     return t_s
 
-val5 = st.time_input("Set timer", value=zeit(0,0,0)) # value değeri ile varsayılan bir zaman atamış oluyoruz
-if str(val5) == "00.00.00": # dakika, saniye , mili saniye
-    st.write("Please sent timer")
+val5 = st.time_input("Set Timer", value=zeit(0,0,0)) # value değeri ile varsayılan bir zaman atamış oluyoruz. burada ortaya çıkan değer datetime.time tipinde bir element
+if str(val5) == "00:00:00": # dakika, saniye , mili saniye
+    st.write("Please set timer")
 else:
     sec = converter(str(val5))
     bar = st.progress(0) # default olarak 100 basamak var
@@ -83,8 +81,53 @@ else:
         ts.sleep(per)
 
 
+#################### FORM ################
 
+st.markdown("---")
 
+st.markdown("<h1>User Registiration<h1>", unsafe_allow_html=True)
+form = st.form("Form 1")
 
+form.text_input("First Name")
+form.form_submit_button("Submit")
 
+st.markdown("---")
 
+with st.form("Form 2"):
+    st.text_input("First Name")
+    st.form_submit_button("Submit")
+
+st.markdown("---")
+with st.form("Form 3"):
+    col1, col2, col3, col4 = st.columns(4)
+    col1.text_input("First Name")
+    col2.text_input("Last Name")
+    col3.text_input("City")
+    col4.text_input("Adress")
+    st.text_input("Email Address")
+    st.text_input("Password")
+    st.text_input("Confirm Password")
+    st.form_submit_button("Submit")
+
+st.markdown("---")
+
+st.markdown("<h1 style='text-align: center;'>User Registiration<h1>", unsafe_allow_html=True)
+# css kodu ile başlığı formun ortasına aldık
+with st.form("Form 4", clear_on_submit = True):
+    col1, col2 = st.columns(2)
+    f_name = col1.text_input("First Name")
+    l_name = col2.text_input("Last Name")
+    st.text_input("Email Address")
+    st.text_input("Password")
+    st.text_input("Confirm Password")
+    day, month, year = st.columns(3)
+    day.text_input("Day")
+    month.text_input("Month")
+    year.text_input("Year")
+    s_status = st.form_submit_button("Submit")
+
+    if s_status:
+        if f_name == "" and l_name == "":
+            st.warning("Please Fill above fields")
+        else:
+            st.success("Submitted Succesfully")
