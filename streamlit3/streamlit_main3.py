@@ -15,5 +15,29 @@ fig = plt.figure()
 plt.plot(x, np.sin(x))
 st.write(fig)
 
+st.markdown("---")
 
-# https://www.youtube.com/watch?v=cUKqsnLGQBw&list=PLa6CNrvKM5QU7AjAS90zCMIwi9RTFNIIW&index=14
+opt = st.sidebar.radio("Select Any Graph", options=("Line", "Bar", "H-Bar"))
+bar_x = np.array([1, 2, 3, 4, 5])
+if opt =="Line":
+    st.markdown("<h1 style='text-align: center;'>Line Chart</h1>", unsafe_allow_html = True)
+    fig = plt.figure()
+    plt.style.use("https://raw.githubusercontent.com/dhaitz/matplotlib-stylesheets/master/pitayasmoothie-dark.mplstyle")
+    plt.plot(x, np.sin(x))
+    plt.plot(x, np.cos(x), "--")
+    st.write(fig)
+
+elif opt == "Bar":
+    st.markdown("<h1 style='text-align: center;'>Line Chart</h1>", unsafe_allow_html = True)
+    fig = plt.figure()
+    plt.style.use("https://raw.githubusercontent.com/dhaitz/matplotlib-stylesheets/master/pitayasmoothie-dark.mplstyle")
+    plt.bar(bar_x, bar_x*10)
+    st.write(fig)
+
+else:
+    st.markdown("<h1 style='text-align: center;'>Line Chart</h1>", unsafe_allow_html = True)
+    fig = plt.figure()
+    plt.style.use("https://raw.githubusercontent.com/dhaitz/matplotlib-stylesheets/master/pitayasmoothie-dark.mplstyle")
+    bar_x = np.array([1, 2, 3, 4, 5])
+    plt.barh(bar_x, bar_x*10)
+    st.write(fig)
